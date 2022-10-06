@@ -34,5 +34,6 @@ public class UsuariosModel {
     @Column(name = "senha_usuario", length = 70, nullable = false)
     private String senha;
 
+
 }
 

@@ -1,7 +1,8 @@
 package com.example.usuariosSecurity.controller;
 
 import com.example.usuariosSecurity.model.UsuariosModel;
-import com.example.usuariosSecurity.model.dto.UsuarioModelDto;
+import com.example.usuariosSecurity.model.dto.UsuarioRequest;
+import com.example.usuariosSecurity.model.dto.UsuarioResponse;
 import com.example.usuariosSecurity.service.UsuariosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/usuarios")
@@ -20,16 +20,13 @@ public class UsuariosController {
     UsuariosService usuariosService;
 
     @PostMapping(path = "/create")
-    public ResponseEntity<UsuariosModel> cadastrarUsuarios(@RequestBody UsuariosModel usuariosModel) {
-        UsuariosModel usuario = usuariosService.cadastrarUsuarios(usuariosModel);
-        return new ResponseEntity<>(usuario, HttpStatus.CREATED);
+    public ResponseEntity<UsuarioResponse> cadastrarUsuarios(@RequestBody UsuarioRequest usuarioRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuariosService.cadastrarUsuarios(usuarioRequest));
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioModelDto>> exibirUsuariosCadastrados() {
-        List<UsuariosModel> usuariosModelList = usuariosService.exibirUsuariosCadastrados();
-        List<UsuarioModelDto> usuarioModelDtoList = usuariosModelList.stream().map(obj -> new UsuarioModelDto(obj)).collect(Collectors.toList());
-        return ResponseEntity.ok().body(usuarioModelDtoList);
+    public ResponseEntity<List<UsuarioResponse>> exibirUsuariosCadastrados() {
+        return ResponseEntity.ok().body(usuariosService.exibirUsuariosCadastrados());
     }
 
     @GetMapping(path = "/{id}")
