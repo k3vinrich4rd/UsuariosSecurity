@@ -28,10 +28,10 @@ public class UsuariosModel {
     @Column(name = "telefone_usuario", length = 12, nullable = false)
     private String telefone;
 
-    @Column(name = "login_usuario", length = 70, nullable = false)
+    @Column(name = "login_usuario", length = 70, nullable = false, unique = true)
     private String login;
 
-    @Column(name = "senha_usuario", length = 70, nullable = false, unique = true)
+    @Column(name = "senha_usuario", length = 70, nullable = false)
     private String senha;
 
 }
