@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "usuarios")
-public class UsuariosModel {
+public class UsuarioModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,16 +23,16 @@ public class UsuariosModel {
     @Column(name = "nome_usuario", length = 70, nullable = false)
     private String nome;
 
-    @Column(name = "idade_usuario", length = 8, nullable = false)
+    @Column(name = "idade_usuario", length = 7, nullable = false)
     private String idade;
 
     @Column(name = "telefone_usuario", length = 12, nullable = false)
     private String telefone;
 
-    @Column(name = "login_usuario", length = 70, nullable = false, unique = true)
+    @Column(name = "login_usuario", length = 20, nullable = false, unique = true)
     private String login;
 
-    @Column(name = "senha_usuario", length = 70, nullable = false)
+    @Column(name = "senha_usuario", nullable = false)
     private String senha;
 
 
